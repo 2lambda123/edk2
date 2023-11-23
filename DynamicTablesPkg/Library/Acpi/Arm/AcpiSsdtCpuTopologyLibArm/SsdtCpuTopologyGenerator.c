@@ -1100,6 +1100,12 @@ CreateAmlCpuTopologyTree (
           Name = CpuIndex;
         }
 
+        if (Generator->ProcNodeList[Index].OverrideNameUidEnabled) {
+          Name = Generator->ProcNodeList[Index].OverrideName;
+        } else {
+          Name = CpuIndex;
+        }
+
         Status = CreateAmlCpuFromProcHierarchy (
                    Generator,
                    CfgMgrProtocol,
@@ -1132,6 +1138,14 @@ CreateAmlCpuTopologyTree (
           Uid  = Generator->ProcNodeList[Index].OverrideUid;
         } else {
           Name = ProcContainerName;
+          Uid  = *ProcContainerIndex;
+        }
+
+        if (Generator->ProcNodeList[Index].OverrideNameUidEnabled) {
+          Name = Generator->ProcNodeList[Index].OverrideName;
+          Uid  = Generator->ProcNodeList[Index].OverrideUid;
+        } else {
+          Name = *ProcContainerIndex;
           Uid  = *ProcContainerIndex;
         }
 
